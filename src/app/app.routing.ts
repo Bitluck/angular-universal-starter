@@ -21,7 +21,7 @@ const routes: Routes = [
   {
     path: '',
     component: WrapperComponent,
-    canActivateChild: [MetaGuard, AuthGuard],
+    canActivateChild: [/* MetaGuard, AuthGuard */],
     children: [
       {
         path: 'mock',

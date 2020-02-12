@@ -39,14 +39,15 @@ import { ngExpressEngine } from '@nguniversal/express-engine';
 // Import module map for lazy loading
 import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
 import { renderModuleFactory } from '@angular/platform-server';
-import { ROUTES } from './static.paths';
+// import { ROUTES } from './static.paths';
+const ROUTES = [];
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
 const mainFiles = files.filter((file) => file.startsWith('main'));
 const hash = mainFiles[0].split('.')[1];
 const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require(`./dist-server/main.${hash}`);
 import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
-import { NgxRequest, NgxResponce } from '@gorniv/ngx-universal';
+// import { NgxRequest, NgxResponce } from '@gorniv/ngx-universal';
 
 const BROWSER_FOLDER = join(process.cwd(), 'static');
 
@@ -86,18 +87,18 @@ ROUTES.forEach((route) => {
             provide: RESPONSE,
             useValue: {},
           },
-          {
+          /* {
             provide: NgxRequest,
             useValue: { cookie: '', headers: {} },
           },
           {
             provide: NgxResponce,
             useValue: {},
-          },
-          {
+          }, */
+          /* {
             provide: 'ORIGIN_URL',
             useValue: environment.host,
-          },
+          }, */
         ],
       }),
     )

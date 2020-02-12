@@ -5,10 +5,10 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // libs
-import { CookieService, CookieModule } from '@gorniv/ngx-universal';
+// import { CookieService, CookieModule } from '@gorniv/ngx-universal';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 // shared
-import { SharedModule } from '@shared/shared.module';
+// import { SharedModule } from '@shared/shared.module';
 import { TranslatesService } from '@shared/translates';
 import { AuthService } from '@shared/services/auth.service';
 // components
@@ -60,7 +60,7 @@ export function initLanguage(translateService: TranslatesService): Function {
   ],
   declarations: [AppComponent],
   providers: [
-    CookieService,
+    // CookieService,
     UniversalStorage,
     AuthService,
     // Guards

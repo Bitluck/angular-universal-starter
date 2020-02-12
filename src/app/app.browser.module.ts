@@ -36,7 +36,7 @@ export function getRequest(): any {
       provide: REQUEST,
       useFactory: getRequest,
     },
-    { provide: 'ORIGIN_URL', useValue: location.origin },
+    // { provide: 'ORIGIN_URL', useValue: location.origin },
   ],
 })
 export class AppBrowserModule {}

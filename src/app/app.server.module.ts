@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
 import { InlineStyleComponent } from './inline-style/inline-style.component';
 import { InlineStyleModule } from './inline-style/inline-style.module';
-import { CookieService, CookieBackendService, CookieModule } from '@gorniv/ngx-universal';
+// import { CookieService, CookieBackendService, CookieModule } from '@gorniv/ngx-universal';
 
 @NgModule({
   imports: [
@@ -25,8 +25,8 @@ import { CookieService, CookieBackendService, CookieModule } from '@gorniv/ngx-u
     TranslatesServerModule,
   ],
   bootstrap: [AppComponent, InlineStyleComponent],
-  providers: [
+  /* providers: [
     { provide: CookieService, useClass: CookieBackendService },
-  ],
+  ], */
 })
 export class AppServerModule {}
