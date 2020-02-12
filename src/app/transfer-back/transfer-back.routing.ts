@@ -1,5 +1,6 @@
 import { TransferBackComponent } from './transfer-back.component';
 import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {
@@ -14,4 +15,10 @@ const routes: Routes = [
   },
 ];
 
-export const TransferBackRoutes = RouterModule.forChild(routes);
+// export const TransferBackRoutes = RouterModule.forChild(routes);
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class TransferBackRoutes { }

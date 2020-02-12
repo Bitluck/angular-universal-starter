@@ -1,33 +1,46 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
-import { TransferHttpService } from '@gorniv/ngx-universal';
 import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { AppState } from '@shared/store/state';
+import { transferBackPageActions } from './shared/store/actions';
+import { transferBackPageSelectors } from './shared/store/selectors';
 
 @Component({
   selector: 'app-transfer-back',
   templateUrl: './transfer-back.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TransferBackComponent implements OnInit {
-  public result: any;
+export class TransferBackComponent implements OnInit, OnDestroy {
   public resultHttpClient: any;
-  public resultPost: any;
+  public resultStore$: any;
+  public isLoadingStore$: any;
+  // public resultPost: any;
 
   constructor(
-    private http: TransferHttpService,
     private httpClient: HttpClient,
-    @Inject('ORIGIN_URL') public baseUrl: string,
+    private store: Store<AppState>
+    // @Inject('ORIGIN_URL') public baseUrl: string,
   ) {
-    console.log(`ORIGIN_URL=${baseUrl}`);
+    // console.log(`ORIGIN_URL=${baseUrl}`);
+    this.resultStore$ = this.store.select(transferBackPageSelectors.users);
+    this.isLoadingStore$ = this.store.select(transferBackPageSelectors.isLoading);
   }
 
   ngOnInit(): void {
-    this.http.get('https://reqres.in/api/users?delay=3').subscribe((result) => {
-      this.result = result;
-    });
+    this.store.dispatch(transferBackPageActions.getUsers());
+    // this.loadData();
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(transferBackPageActions.refreshState());
+  }
+
+  public async loadData(): Promise<void> {
     this.httpClient.get('https://reqres.in/api/users?delay=3').subscribe((result) => {
       this.resultHttpClient = result;
     });
-    this.http
+    /* this.http
       .post(
         'https://reqres.in/api/users',
         JSON.stringify({
@@ -37,6 +50,6 @@ export class TransferBackComponent implements OnInit {
       )
       .subscribe((result) => {
         this.resultPost = result;
-      });
+      }); */
   }
 }
